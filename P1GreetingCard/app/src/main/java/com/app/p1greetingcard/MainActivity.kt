@@ -3,14 +3,19 @@ package com.app.p1greetingcard
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.p1greetingcard.ui.theme.P1GreetingCardTheme
 
@@ -24,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    BirthdayGreetingWithText("Happy Birthday Erling","From Emma")
+                    BirthdayGreetingImage("Happy Birthday Erling","From Emma")
                 }
             }
         }
@@ -32,10 +37,36 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun BirthdayGreetingImage(message:String,from: String){
+    val image= painterResource(id = R.drawable.androidparty)
+    Box {
+        Image(
+            painter = image,
+            contentDescription = null,
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            contentScale = ContentScale.Crop
+        )
+        BirthdayGreetingWithText(name = message, from = from)
+    }
+}
+
+@Composable
 fun BirthdayGreetingWithText(name:String,from:String){
     Column {
-        Text(text = name, fontSize = 36.sp)
-        Text(text = from, fontSize = 24.sp)
+        Text(
+            text = name,
+            fontSize = 36.sp,
+            modifier = Modifier.fillMaxWidth().wrapContentWidth(
+                align = Alignment.CenterHorizontally
+            ).padding(start = 16.dp, top = 16.dp)
+        )
+        Text(
+            text = from,
+            fontSize = 24.sp,
+            modifier = Modifier.fillMaxWidth().wrapContentWidth(
+                align = Alignment.CenterHorizontally
+            ).padding(start = 16.dp, end = 16.dp)
+        )
     }
 }
 
@@ -43,6 +74,9 @@ fun BirthdayGreetingWithText(name:String,from:String){
 @Composable
 fun DefaultPreview() {
     P1GreetingCardTheme {
-        BirthdayGreetingWithText("Happy Birthday Erling","- from Emma")
+        BirthdayGreetingImage(
+            stringResource(R.string.happy_birthday_erling),
+            stringResource(R.string.from_emma)
+        )
     }
 }
