@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LemonSqueezer</string>
+    <string name="step1_instruction">Tap the lemon tree to select a lemon</string>
+    <string name="step2_instruction">Keep tapping the lemon to squeeze it</string>
+    <string name="step3_instruction">Tap the lemonade to drink it</string>
+    <string name="step4_instruction">Tap the empty glass to start again</string>
+    <string name="pic1_content">Lemon tree</string>
+    <string name="pic2_content">Lemon</string>
+    <string name="pic3_content">Glass of lemonade</string>
+    <string name="pic4_content">Empty glass</string>
+</resources>
