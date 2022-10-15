@@ -23,14 +23,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.app.tiptime.ui.theme.TipTimeTheme
 import java.text.NumberFormat
-import kotlin.jvm.internal.Intrinsics.Kotlin
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            TipTimeTheme() {
-                Surface(){
+            TipTimeTheme {
+                Surface {
                     TipTimeScreen()
                 }
             }
@@ -90,7 +89,6 @@ fun TipTimeScreen() {
             )
         )
         RoundTheTipRow(
-            modifier = Modifier.fillMaxWidth(),
             roundUp = roundUp,
             roundUpChange = { roundUp=it }
         )
@@ -106,7 +104,6 @@ fun TipTimeScreen() {
 
 @Composable
 fun RoundTheTipRow(
-    modifier: Modifier,
     roundUp:Boolean,
     roundUpChange: (Boolean)->Unit
 ){
@@ -160,7 +157,7 @@ private fun calculateTip(amount:Double,tipPercent:Double=15.0,roundUp: Boolean):
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview(){
-    TipTimeTheme() {
+    TipTimeTheme {
         TipTimeScreen()
     }
 }
