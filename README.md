@@ -6,3 +6,6 @@ Android Codelabs With Kotlin
 - 03 => Task Manager Exercise
 - 04 => Quadrant Exercise
 - 05 => Business Card
+- 06 => Dice Roller
+- 07 => Lemon Squeezer
+- 08 => Tip Time
