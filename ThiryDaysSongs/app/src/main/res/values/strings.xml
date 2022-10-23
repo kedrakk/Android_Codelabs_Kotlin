@@ -3,6 +3,7 @@
     <string name="artist">Artist</string>
     <string name="genre">Genre</string>
     <string name="release_date">Released on: %s</string>
+    <string name="app_bar_title">Ten Days Song Challenge</string>
 
     <string name="song_1">Video Games</string>
     <string name="song_2">Ophelia</string>
