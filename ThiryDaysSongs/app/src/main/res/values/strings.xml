@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">ThirtyDaysSongs</string>
+    <string name="artist">Artist</string>
+    <string name="genre">Genre</string>
+    <string name="release_date">Released on: %s</string>
+
+    <string name="song_1">Video Games</string>
+    <string name="song_2">Ophelia</string>
+    <string name="song_3">London Boy</string>
+    <string name="song_4">Demons</string>
+    <string name="song_5">I found a girl</string>
+    <string name="song_6">I love you</string>
+    <string name="song_7">Haper du har plass</string>
+    <string name="song_8">As It Was</string>
+    <string name="song_9">Photograph</string>
+    <string name="song_10">What do you mean?</string>
+
+    <string name="artist_1">Lana Del Rey</string>
+    <string name="artist_2">The Lumineers</string>
+    <string name="artist_3">Taylor Swift</string>
+    <string name="artist_4">Imagine Dragon</string>
+    <string name="artist_5">The Vamps</string>
+    <string name="artist_6">Billie Eillish</string>
+    <string name="artist_7">Cezinando</string>
+    <string name="artist_8">Harry Styles</string>
+    <string name="artist_9">Ed Sheeran</string>
+    <string name="artist_10">Justin Bieber</string>
+
+    <string name="genre_1">Alternative/Indie, Dance/Electronic, Pop</string>
+    <string name="genre_2">Alternative/Indie</string>
+    <string name="genre_3">Britpop; bubblegum pop</string>
+    <string name="genre_4">Alternative rock, Pop rock, Indie rock, Alternative/Indie, Childrens Music, Electropop, Pop</string>
+    <string name="genre_5">Alternative/Indie, Pop</string>
+    <string name="genre_6">Pop music, Alternative/Indie, Electropop, Art Pop, Avant-pop, Pop, J-Pop</string>
+    <string name="genre_7">RB/Soul, German Hip Hop, Pop, German Pop</string>
+    <string name="genre_8">Funk, Contemporary RB, Pop rock, Alternative/Indie, Synth-pop</string>
+    <string name="genre_9">Folk music, RB/Soul, Dance/Electronic, Pop, Hip-Hop/Rap, French Urban Pop/RB</string>
+    <string name="genre_10">Pop; tropical house</string>
+
+</resources>
