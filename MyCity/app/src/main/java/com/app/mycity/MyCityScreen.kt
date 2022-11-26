@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -21,30 +23,40 @@ import com.app.mycity.ui.theme.Typography
 import com.app.mycity.utils.CurrentPage
 
 @Composable
-fun MyCityScreen(){
+fun MyCityScreen() {
     val viewModel: MyCityViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
 
-    var appbarTitle = when(uiState.currentPage){
+    var isShowBackButtonOnAppBar: Boolean = false
+    var appbarTitle: String = stringResource(id = uiState.selectedCategory.name)
+
+    when (uiState.currentPage) {
         CurrentPage.SUB -> {
-            stringResource(id = uiState.selectedCategory.name)
+            appbarTitle = stringResource(id = uiState.selectedCategory.name)
+            isShowBackButtonOnAppBar = true
         }
         else -> {
-            stringResource(id = R.string.app_name)
+            appbarTitle = stringResource(id = R.string.app_name)
+            isShowBackButtonOnAppBar = false
         }
     }
     Scaffold(
         topBar = {
             MyCityTopBar(
-                title = appbarTitle
+                title = appbarTitle,
+                isShowBackButton = isShowBackButtonOnAppBar,
+                onBackButtonClick = {
+                    if (uiState.currentPage == CurrentPage.SUB) {
+                        viewModel.navigateToMainPage()
+                    }
+                }
             )
         }
     ) {
 
-        if(uiState.currentPage==CurrentPage.SUB){
+        if (uiState.currentPage == CurrentPage.SUB) {
             Places(category = uiState.selectedCategory)
-        }
-        else{
+        } else {
             CategoryList(
                 categoryItems = uiState.categoryList,
                 onItemClick = {
@@ -58,28 +70,43 @@ fun MyCityScreen(){
 
 @Composable
 fun MyCityTopBar(
-    title:String
-){
-    TopAppBar{
-         Text(
-             text = title,
-             style = Typography.h2
-         )
+    title: String,
+    isShowBackButton: Boolean,
+    onBackButtonClick: () -> Unit
+) {
+    TopAppBar {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (isShowBackButton)
+                IconButton(onClick = onBackButtonClick) {
+                    Icon(
+                        imageVector = Icons.Filled.ArrowBack,
+                        contentDescription = stringResource(R.string.back_button)
+                    )
+                } else {
+                null
+            }
+            Text(
+                text = title,
+                style = Typography.h2
+            )
+        }
     }
 }
 
 @Composable
 fun CategoryList(
-    categoryItems:List<Category>,
+    categoryItems: List<Category>,
     onItemClick: (Category) -> Unit,
-){
+) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         items(categoryItems, key = { category -> category.id }) { category ->
             CategoryItemList(
-                category,onItemClick
+                category, onItemClick
             )
         }
     }
@@ -90,7 +117,7 @@ fun CategoryList(
 fun CategoryItemList(
     category: Category,
     onItemClick: (Category) -> Unit,
-){
+) {
     Card(
         elevation = 2.dp,
         onClick = {
@@ -120,7 +147,7 @@ fun CategoryItemList(
 }
 
 @Composable
-internal fun ImageItem(imageId:Int, modifier: Modifier = Modifier) {
+internal fun ImageItem(imageId: Int, modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .width(170.dp)

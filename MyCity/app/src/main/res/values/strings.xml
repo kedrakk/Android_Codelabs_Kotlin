@@ -12,5 +12,6 @@
     <string name="restaurant_two">Restaurant Two</string>
     <string name="restaurant_three">Restaurant Three</string>
 
+    <string name="back_button">Back</string>
     <string name="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi debitis delectus distinctio libero non officiis repellendus sunt. Consequatur deserunt dolore, dolorum exercitationem labore laboriosam nisi nulla quia sint voluptatibus.</string>
 </resources>

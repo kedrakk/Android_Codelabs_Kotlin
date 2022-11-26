@@ -32,6 +32,12 @@ class MyCityViewModel: ViewModel() {
         }
     }
 
+    fun navigateToMainPage(){
+        _uiState.update {
+            it.copy(currentPage = CurrentPage.MAIN)
+        }
+    }
+
 }
 
 data class MyCityUIState(
