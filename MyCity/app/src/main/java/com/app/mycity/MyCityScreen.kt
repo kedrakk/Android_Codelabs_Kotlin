@@ -35,6 +35,10 @@ fun MyCityScreen() {
             appbarTitle = stringResource(id = uiState.selectedCategory.name)
             isShowBackButtonOnAppBar = true
         }
+        CurrentPage.DETAIL -> {
+            appbarTitle = stringResource(id = uiState.selectedPlaces.name)
+            isShowBackButtonOnAppBar = true
+        }
         else -> {
             appbarTitle = stringResource(id = R.string.app_name)
             isShowBackButtonOnAppBar = false
@@ -49,14 +53,30 @@ fun MyCityScreen() {
                     if (uiState.currentPage == CurrentPage.SUB) {
                         viewModel.navigateToMainPage()
                     }
+                    if(uiState.currentPage==CurrentPage.DETAIL){
+                        viewModel.navigateToItemList()
+                    }
                 }
             )
         }
     ) {
 
         if (uiState.currentPage == CurrentPage.SUB) {
-            Places(category = uiState.selectedCategory)
-        } else {
+            Places(
+                category = uiState.selectedCategory,
+                onPlaceItemClicked = {
+                    viewModel.updateCurrentItem(it)
+                    viewModel.navigateToDetail()
+                },
+            )
+        }
+        else if(uiState.currentPage == CurrentPage.DETAIL){
+            PlaceDetail(
+                selectedPlace = uiState.selectedPlaces,
+                onBackPressed = { /*TODO*/ }
+            )
+        }
+        else {
             CategoryList(
                 categoryItems = uiState.categoryList,
                 onItemClick = {

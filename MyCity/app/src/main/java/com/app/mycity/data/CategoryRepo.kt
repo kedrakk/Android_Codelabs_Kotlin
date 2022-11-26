@@ -4,6 +4,7 @@ import com.app.mycity.R
 
 object CategoryRepo {
     val defaultCategory = CategoryData()[0]
+    val defaultItem = CategoryData()[0].places[0]
     fun CategoryData(): List<Category> {
         return listOf(
             Category(
