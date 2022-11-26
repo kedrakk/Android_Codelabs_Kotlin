@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyCity</string>
+
+    <string name="category_one">Coffee Shops</string>
+    <string name="category_two">Restaurants</string>
+
+    <string name="coffee_shop_one">Coffee Shop One</string>
+    <string name="coffee_shop_two">Coffee Shop Two</string>
+    <string name="coffee_shop_three">Coffee Shop Three</string>
+
+    <string name="restaurant_one">Restaurant One</string>
+    <string name="restaurant_two">Restaurant Two</string>
+    <string name="restaurant_three">Restaurant Three</string>
+
+    <string name="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi commodi debitis delectus distinctio libero non officiis repellendus sunt. Consequatur deserunt dolore, dolorum exercitationem labore laboriosam nisi nulla quia sint voluptatibus.</string>
+</resources>
