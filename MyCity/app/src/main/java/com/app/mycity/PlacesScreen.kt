@@ -88,22 +88,17 @@ fun PlaceDetail(
     Column(
         modifier = modifier.padding(4.dp)
     ) {
-        Box {
-            Image(
-                painter = painterResource(selectedPlace.image),
-                contentDescription = null,
-                alignment = Alignment.TopCenter,
-                contentScale = ContentScale.FillWidth
-            )
-            Text(
-                text = stringResource(selectedPlace.name),
-                style = MaterialTheme.typography.h5,
-                color = MaterialTheme.colors.onSurface,
-                modifier = Modifier
-                    .padding(8.dp)
-                    .align(Alignment.BottomStart)
-            )
-        }
+        Image(
+            painter = painterResource(selectedPlace.image),
+            contentDescription = null,
+            alignment = Alignment.TopCenter,
+            contentScale = ContentScale.FillWidth
+        )
+        Text(
+            text = stringResource(selectedPlace.name),
+            style = MaterialTheme.typography.h5,
+            color = MaterialTheme.colors.onSurface,
+        )
         Text(
             text = stringResource(selectedPlace.desc),
             style = MaterialTheme.typography.body1,
