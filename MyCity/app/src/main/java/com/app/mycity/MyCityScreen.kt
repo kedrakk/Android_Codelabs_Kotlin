@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,15 +21,31 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.app.mycity.data.Category
 import com.app.mycity.ui.theme.MyCityViewModel
 import com.app.mycity.ui.theme.Typography
+import com.app.mycity.utils.ContentType
 import com.app.mycity.utils.CurrentPage
 
 @Composable
-fun MyCityScreen() {
+fun MyCityScreen(windowWidthSizeClass: WindowWidthSizeClass) {
     val viewModel: MyCityViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
 
     var isShowBackButtonOnAppBar: Boolean = false
     var appbarTitle: String = stringResource(id = uiState.selectedCategory.name)
+
+    var contentType:ContentType=when(windowWidthSizeClass){
+        WindowWidthSizeClass.Compact -> {
+            ContentType.LIST_ONLY
+        }
+        WindowWidthSizeClass.Medium -> {
+            ContentType.LIST_ONLY
+        }
+        WindowWidthSizeClass.Expanded -> {
+            ContentType.LIST_AND_DETAIL
+        }
+        else -> {
+            ContentType.LIST_ONLY
+        }
+    }
 
     when (uiState.currentPage) {
         CurrentPage.SUB -> {
@@ -61,29 +78,44 @@ fun MyCityScreen() {
         }
     ) {
 
-        if (uiState.currentPage == CurrentPage.SUB) {
-            Places(
+        if(contentType==ContentType.LIST_AND_DETAIL){
+            PlaceWithCategory(
                 category = uiState.selectedCategory,
+                places = uiState.selectedPlaces,
+                categoryList = uiState.categoryList,
+                onCategoryClick = {
+                    viewModel.updateCurrentCategory(it)
+                    viewModel.updateCurrentItem(it.places.first())
+                },
                 onPlaceItemClicked = {
                     viewModel.updateCurrentItem(it)
-                    viewModel.navigateToDetail()
-                },
-            )
-        }
-        else if(uiState.currentPage == CurrentPage.DETAIL){
-            PlaceDetail(
-                selectedPlace = uiState.selectedPlaces,
-                onBackPressed = { /*TODO*/ }
-            )
-        }
-        else {
-            CategoryList(
-                categoryItems = uiState.categoryList,
-                onItemClick = {
-                    viewModel.updateCurrentCategory(it)
-                    viewModel.navigateToItemList()
                 }
             )
+        }else{
+            if (uiState.currentPage == CurrentPage.SUB) {
+                Places(
+                    category = uiState.selectedCategory,
+                    onPlaceItemClicked = {
+                        viewModel.updateCurrentItem(it)
+                        viewModel.navigateToDetail()
+                    },
+                )
+            }
+            else if(uiState.currentPage == CurrentPage.DETAIL){
+                PlaceDetail(
+                    selectedPlace = uiState.selectedPlaces,
+                    onBackPressed = { /*TODO*/ }
+                )
+            }
+            else {
+                CategoryList(
+                    categoryItems = uiState.categoryList,
+                    onItemClick = {
+                        viewModel.updateCurrentCategory(it)
+                        viewModel.navigateToItemList()
+                    }
+                )
+            }
         }
     }
 }
@@ -119,10 +151,12 @@ fun MyCityTopBar(
 fun CategoryList(
     categoryItems: List<Category>,
     onItemClick: (Category) -> Unit,
+    modifier: Modifier=Modifier.padding(0.dp)
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier
     ) {
         items(categoryItems, key = { category -> category.id }) { category ->
             CategoryItemList(

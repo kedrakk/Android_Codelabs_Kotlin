@@ -26,11 +26,15 @@ fun Places(category: Category, onPlaceItemClicked: (Places) -> Unit) {
 
 @Composable
 fun PlacesList(
-    places: List<Places>, category: Category, onPlaceItemClicked: (Places) -> Unit,
+    places: List<Places>,
+    category: Category,
+    onPlaceItemClicked: (Places) -> Unit,
+    modifier: Modifier = Modifier.padding(0.dp)
 ) {
     LazyColumn(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = modifier
     ) {
         items(places, key = { place -> place.id }) { place ->
             PlaceItemList(
@@ -103,6 +107,40 @@ fun PlaceDetail(
             text = stringResource(selectedPlace.desc),
             style = MaterialTheme.typography.body1,
             modifier = Modifier.padding(8.dp)
+        )
+    }
+}
+
+@Composable
+fun PlaceWithCategory(
+    category: Category,
+    places: Places,
+    categoryList: List<Category>,
+    onCategoryClick: (Category) -> Unit,
+    onPlaceItemClicked: (Places) -> Unit
+) {
+    Row(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        CategoryList(
+            categoryItems = categoryList,
+            onItemClick = {
+                onCategoryClick(it)
+            },
+            modifier = Modifier.weight(1f)
+        )
+        PlacesList(
+            places = category.places,
+            category = category,
+            onPlaceItemClicked = {
+                onPlaceItemClicked(it)
+            },
+            modifier = Modifier.weight(1f)
+        )
+        PlaceDetail(
+            selectedPlace = places,
+            onBackPressed = { /*TODO*/ },
+            modifier = Modifier.weight(1f)
         )
     }
 }
